@@ -14,6 +14,9 @@
 
 class CanvasRenderingContext2D : public object
 {
+private:
+    int _getNextID();
+
 public:
     CanvasRenderingContext2D();
     ~CanvasRenderingContext2D();

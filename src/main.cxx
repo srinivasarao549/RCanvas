@@ -55,6 +55,12 @@ int main(int argc, char *argv[])
     ctx->clip();
     ctx->isPointInPath(0, 0);
 
+    ctx->fillText(new DOMString(), 0, 0);
+    ctx->fillText(new DOMString(), 0, 0, 1);
+    ctx->strokeText(new DOMString(), 0, 0);
+    ctx->strokeText(new DOMString(), 0, 0, 1);
+    (void) ctx->measureText(new DOMString());
+
     ctx->drawImage(new HTMLImageElement(), 0, 0);
     ctx->drawImage(new HTMLImageElement(), 0, 0, 1, 1);
     ctx->drawImage(new HTMLImageElement(), 0, 0, 1, 1, 2, 2, 3, 3);

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -18,37 +19,49 @@ CanvasRenderingContext2D::~CanvasRenderingContext2D()
     // ...
 }
 
+int CanvasRenderingContext2D::_getNextID()
+{
+    static int i = 0;
+
+    return ++i;
+}
+
 void CanvasRenderingContext2D::save()
 {
-    cerr << "save()" << endl;
+    cerr << "{\"method\":\"save\",\"params\":null,\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::restore()
 {
-    cerr << "restore()" << endl;
+    cerr << "{\"method\":\"restore\",\"params\":null,\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::scale(double x, double y)
 {
-    cerr << "scale(x, y)" << endl;
+    cerr << "{\"method\":\"scale\",\"params\":[" << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::rotate(double angle)
 {
-    cerr << "rotate(angle)" << endl;
+    cerr << "{\"method\":\"rotate\":,\"params\":[" << angle << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::translate(double x, double y)
 {
-    cerr << "translate(x, y)" << endl;
+    cerr << "{\"method\":\"translate\",\"params\":[" << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -56,7 +69,9 @@ void CanvasRenderingContext2D::translate(double x, double y)
 void CanvasRenderingContext2D::transform(double a, double b, double c,
     double d, double e, double f)
 {
-    cerr << "transform(a, b, c, d, e, f)" << endl;
+    cerr << "{\"method\":\"transform\",\"params\":[" << a << "," << b << "," <<
+        c << "," << d << "," << e << "," << f << "],\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
@@ -64,7 +79,9 @@ void CanvasRenderingContext2D::transform(double a, double b, double c,
 void CanvasRenderingContext2D::setTransform(double a, double b, double c,
     double d, double e, double f)
 {
-    cerr << "setTransform(a, b, c, d, e, f)" << endl;
+    cerr << "{\"method\":\"setTransform\",\"params\":[" << a << "," << b <<
+        "," << c << "," << d << "," << e << "," << f << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
@@ -72,7 +89,9 @@ void CanvasRenderingContext2D::setTransform(double a, double b, double c,
 CanvasGradient* CanvasRenderingContext2D::createLinearGradient(double x0,
     double y0, double x1, double y1)
 {
-    cerr << "createLinearGradient(x0, y0, x1, y1)" << endl;
+    cerr << "{\"method\":\"createLinearGradient\",\"params\":[" << x0 <<
+        "," << y0 << "," << x1 << "," << y1 << "],\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 
@@ -82,7 +101,9 @@ CanvasGradient* CanvasRenderingContext2D::createLinearGradient(double x0,
 CanvasGradient* CanvasRenderingContext2D::createRadialGradient(double x0,
     double y0, double r0, double x1, double y1, double r1)
 {
-    cerr << "createRadialGradient(x0, y0, r0, x1, y1, r1)" << endl;
+    cerr << "{\"method\":\"createRadialGradient\",\"params\":[" << x0 << "," <<
+        y0 << "," << r0 << "," << x1 << "," << y1 << "," << r1 <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -90,7 +111,8 @@ CanvasGradient* CanvasRenderingContext2D::createRadialGradient(double x0,
 CanvasPattern* CanvasRenderingContext2D::createPattern(HTMLImageElement* image,
     DOMString* repetition)
 {
-    cerr << "createPattern([image] image, repetition)" << endl;
+    cerr << "{\"method\":\"createPattern\",\"params\":[\"" << image <<
+        "\",\"" << repetition << "\"],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -98,7 +120,8 @@ CanvasPattern* CanvasRenderingContext2D::createPattern(HTMLImageElement* image,
 CanvasPattern* CanvasRenderingContext2D::createPattern(
     HTMLCanvasElement* image, DOMString* repetition)
 {
-    cerr << "createPattern([canvas] image, repetition)" << endl;
+    cerr << "{\"method\":\"createPattern\",\"params\":[\"" << image <<
+        "\",\"" << repetition << "\"],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -106,7 +129,8 @@ CanvasPattern* CanvasRenderingContext2D::createPattern(
 CanvasPattern* CanvasRenderingContext2D::createPattern(HTMLVideoElement* image,
     DOMString* repetition)
 {
-    cerr << "createPattern([video] image, repetiton)" << endl;
+    cerr << "{\"method\":\"createPattern\",\"params\":[\"" << image <<
+        "\",\"" << repetition << "\"],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -114,14 +138,16 @@ CanvasPattern* CanvasRenderingContext2D::createPattern(HTMLVideoElement* image,
 void CanvasRenderingContext2D::clearRect(double x, double y, double w,
     double h)
 {
-    cerr << "clearRect(x, y, w, h)" << endl;
+    cerr << "{\"method\":\"clearRect\",\"params\":[" << x << "," << y << "," <<
+        w << "," << h << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::fillRect(double x, double y, double w, double h)
 {
-    cerr << "fillRect(x, y, w, h)" << endl;
+    cerr << "{\"method\":\"fillRect\",\"params\":[" << x << "," << y << "," <<
+        w << "," << h << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -129,35 +155,40 @@ void CanvasRenderingContext2D::fillRect(double x, double y, double w, double h)
 void CanvasRenderingContext2D::strokeRect(double x, double y, double w,
     double h)
 {
-    cerr << "strokeRect(x, y, w, h)" << endl;
+    cerr << "{\"method\":\"strokeRect\",\"params\":[" << x << "," << y <<
+        "," << w << "," << h << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::beginPath()
 {
-    cerr << "beginPath()" << endl;
+    cerr << "{\"method\":\"beginPath\",\"params\":null,\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::closePath()
 {
-    cerr << "closePath()" << endl;
+    cerr << "{\"method\":\"closePath\",\"params\":null,\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::moveTo(double x, double y)
 {
-    cerr << "moveTo(x, y)" << endl;
+    cerr << "{\"method\":\"moveTo\",\"params\":[" << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::lineTo(double x, double y)
 {
-    cerr << "lineTo(x, y)" << endl;
+    cerr << "{\"method\":\"lineTo\",\"params\":[" << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -165,7 +196,9 @@ void CanvasRenderingContext2D::lineTo(double x, double y)
 void CanvasRenderingContext2D::quadraticCurveTo(double cpx, double cpy,
     double x, double y)
 {
-    cerr << "quadraticCurveTo(cpx, cpy, x, y)" << endl;
+    cerr << "{\"method\":\"quadraticCurveTo\",\"params\":[" << cpx << "," <<
+        cpy << "," << x << "," << y << "],\"id\":" << _getNextID() << "}" <<
+        endl;
 
     // ...
 }
@@ -173,7 +206,9 @@ void CanvasRenderingContext2D::quadraticCurveTo(double cpx, double cpy,
 void CanvasRenderingContext2D::bezierCurveTo(double cp1x, double cp1y,
     double cp2x, double cp2y, double x, double y)
 {
-    cerr << "bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)" << endl;
+    cerr << "{\"method\":\"bezierCurveTo\",\"params\":[" << cp1x << "," <<
+        cp1y << "," << cp2x << "," << cp2y << "," << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -181,14 +216,17 @@ void CanvasRenderingContext2D::bezierCurveTo(double cp1x, double cp1y,
 void CanvasRenderingContext2D::arcTo(double x1, double y1, double x2,
     double y2, double radius)
 {
-    cerr << "arcTo(x1, y1, x2, y2, radius)" << endl;
+    cerr << "{\"method\":\"arcTo\",\"params\":[" << x1 << "," << y1 << "," <<
+        x2 << "," << y2 << "," << radius << "],\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::rect(double x, double y, double w, double h)
 {
-    cerr << "rect(x, y, w, h)" << endl;
+    cerr << "{\"method\":\"rect\",\"params\":[" << x << "," << y <<
+        "," << w << "," << h << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -196,7 +234,9 @@ void CanvasRenderingContext2D::rect(double x, double y, double w, double h)
 void CanvasRenderingContext2D::arc(double x, double y, double radius,
     double startAngle, double endAngle)
 {
-    cerr << "arc(x, y, radius, startAngle, endAngle)" << endl;
+    cerr << "{\"method\":\"arc\",\"params\":[" << x << "," << y << "," <<
+        radius << "," << startAngle << "," << endAngle << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
@@ -204,63 +244,73 @@ void CanvasRenderingContext2D::arc(double x, double y, double radius,
 void CanvasRenderingContext2D::arc(double x, double y, double radius,
     double startAngle, double endAngle, bool anticlockwise)
 {
-    cerr << "arc(x, y, radius, startAngle, endAngle, anticlockwise)" << endl;
+    cerr << "{\"method\":\"arc\",\"params\":[" << x << "," << y << "," <<
+        radius << "," << startAngle << "," << endAngle << "," <<
+        anticlockwise << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::fill()
 {
-    cerr << "fill()" << endl;
+    cerr << "{\"method\":\"fill\",\"params\":null,\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::stroke()
 {
-    cerr << "stroke()" << endl;
+    cerr << "{\"method\":\"stroke\",\"params\":null,\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::drawSystemFocusRing(Element* element)
 {
-    cerr << "drawSystemFocusRing(element)" << endl;
+    cerr << "{\"method\":\"drawSystemFocusRing\",\"params\":[\"" << element <<
+        "\"],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 bool CanvasRenderingContext2D::drawCustomFocusRing(Element* element)
 {
-    cerr << "drawCustomFocusRing(element)" << endl;
+    cerr << "{\"method\":\"drawCustomFocusRing\",\"params\":[\"" << element <<
+        "\"],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::scrollPathIntoView()
 {
-    cerr << "scrollPathIntoView()" << endl;
+    cerr << "{\"method\":\"scrollPathIntoView\",\"params\":null,\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::clip()
 {
-    cerr << "clip()" << endl;
+    cerr << "{\"method\":\"clip\",\"params\":null,\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
 bool CanvasRenderingContext2D::isPointInPath(double x, double y)
 {
-    cerr << "isPointInPath(x, y)" << endl;
+    cerr << "{\"method\":\"isPointInPath\",\"params\":[" << x << "," << y <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::fillText(DOMString* text, double x, double y)
 {
-    cerr << "fillText(text, x, y)" << endl;
+    cerr << "{\"method\":\"fillText\",\"params\":[\"" << text << "\"," << x <<
+        "," << y << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -268,14 +318,17 @@ void CanvasRenderingContext2D::fillText(DOMString* text, double x, double y)
 void CanvasRenderingContext2D::fillText(DOMString* text, double x, double y,
     double maxWidth)
 {
-    cerr << "fillText(text, x, y)" << endl;
+    cerr << "{\"method\":\"fillText\",\"params\":[\"" << text << "\"," << x <<
+        "," << y << "," << maxWidth << "],\"id\":" << _getNextID() << "}" <<
+        endl;
 
     // ...
 }
 
 void CanvasRenderingContext2D::strokeText(DOMString* text, double x, double y)
 {
-    cerr << "strokeText(text, x, y)" << endl;
+    cerr << "{\"method\":\"strokeText\",\"params\":[\"" << text << "\"," <<
+        x << "," << y << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -283,14 +336,17 @@ void CanvasRenderingContext2D::strokeText(DOMString* text, double x, double y)
 void CanvasRenderingContext2D::strokeText(DOMString* text, double x, double y,
     double maxWidth)
 {
-    cerr << "strokeText(text, x, y, maxWidth)" << endl;
+    cerr << "{\"method\":\"strokeText\",\"params\":[\"" << text << "\"," <<
+        x << "," << y << "," << maxWidth << "],\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
 
-TextMetrics* measureText(DOMString* text)
+TextMetrics* CanvasRenderingContext2D::measureText(DOMString* text)
 {
-    cerr << "measureText(text)" << endl;
+    cerr << "{\"method\":\"measureText\",\"params\":[\"" << text <<
+        "\",\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -298,7 +354,8 @@ TextMetrics* measureText(DOMString* text)
 void CanvasRenderingContext2D::drawImage(HTMLImageElement* image, double dx,
     double dy)
 {
-    cerr << "drawImage([image] image, dx, dy)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -306,7 +363,9 @@ void CanvasRenderingContext2D::drawImage(HTMLImageElement* image, double dx,
 void CanvasRenderingContext2D::drawImage(HTMLImageElement* image, double dx,
     double dy, double dw, double dh)
 {
-    cerr << "drawImage([image] image, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "," << dw << "," << dh << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
@@ -315,7 +374,9 @@ void CanvasRenderingContext2D::drawImage(HTMLImageElement* image, double sx,
     double sy, double sw, double sh, double dx, double dy, double dw,
     double dh)
 {
-    cerr << "drawImage([image] image, sx, sy, sw, sh, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        sx << "," << sy << "," << sw << "," << sh << "," << dx << "," << dy <<
+        "," << dw << "," << dh << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -323,7 +384,8 @@ void CanvasRenderingContext2D::drawImage(HTMLImageElement* image, double sx,
 void CanvasRenderingContext2D::drawImage(HTMLCanvasElement* image, double dx,
     double dy)
 {
-    cerr << "drawImage([canvas] image, dx, dy)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -331,7 +393,9 @@ void CanvasRenderingContext2D::drawImage(HTMLCanvasElement* image, double dx,
 void CanvasRenderingContext2D::drawImage(HTMLCanvasElement* image, double dx,
     double dy, double dw, double dh)
 {
-    cerr << "drawImage([canvas] image, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "," << dw << "," << dh << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
@@ -340,7 +404,9 @@ void CanvasRenderingContext2D::drawImage(HTMLCanvasElement* image, double sx,
     double sy, double sw, double sh, double dx, double dy, double dw,
     double dh)
 {
-    cerr << "drawImage([canvas] image, sx, sy, sw, sh, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        sx << "," << sy << "," << sw << "," << sh << "," << dx << "," << dy <<
+        "," << dw << "," << dh << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -348,7 +414,8 @@ void CanvasRenderingContext2D::drawImage(HTMLCanvasElement* image, double sx,
 void CanvasRenderingContext2D::drawImage(HTMLVideoElement* image, double dx,
     double dy)
 {
-    cerr << "drawImage([video] image, dx, dy)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -356,7 +423,9 @@ void CanvasRenderingContext2D::drawImage(HTMLVideoElement* image, double dx,
 void CanvasRenderingContext2D::drawImage(HTMLVideoElement* image, double dx,
     double dy, double dw, double dh)
 {
-    cerr << "drawImage([video] image, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        dx << "," << dy << "," << dw << "," << dh << "],\"id\":" <<
+        _getNextID() << "}" << endl;
 
     // ...
 }
@@ -365,21 +434,25 @@ void CanvasRenderingContext2D::drawImage(HTMLVideoElement* image, double sx,
     double sy, double sw, double sh, double dx, double dy, double dw,
     double dh)
 {
-    cerr << "drawImage([video] image, sx, sy, sw, sh, dx, dy, dw, dh)" << endl;
+    cerr << "{\"method\":\"drawImage\",\"params\":[\"" << image << "\"," <<
+        sx << "," << sy << "," << sw << "," << sh << "," << dx << "," << dy <<
+        "," << dw << "," << dh << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 ImageData* CanvasRenderingContext2D::createImageData(double sw, double sh)
 {
-    cerr << "createImageData(sw, sh)" << endl;
+    cerr << "{\"method\":\"createImageData\",\"params\":[" << sw << "," <<
+        sh << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
 
 ImageData* CanvasRenderingContext2D::createImageData(ImageData* imagedata)
 {
-    cerr << "createImageData(imagedata)" << endl;
+    cerr << "{\"method\":\"createImageData\",\"params\":[" << imagedata <<
+        "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -387,7 +460,8 @@ ImageData* CanvasRenderingContext2D::createImageData(ImageData* imagedata)
 ImageData* CanvasRenderingContext2D::getImageData(double sx, double sy,
     double sw, double sh)
 {
-    cerr << "getImageData(sx, sy, sw, sh)" << endl;
+    cerr << "{\"method\":\"getImageData\",\"params\":[" << sx << "," << sy <<
+        "," << sw << "," << sh << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -395,7 +469,8 @@ ImageData* CanvasRenderingContext2D::getImageData(double sx, double sy,
 void CanvasRenderingContext2D::putImageData(ImageData* imagedata, double dx,
     double dy)
 {
-    cerr << "putImageData(imagedata, dx, dy)" << endl;
+    cerr << "{\"method\":\"putImageData\",\"params\":[\"" << imagedata <<
+        "\"," << dx << "," << dy << "],\"id\":" << _getNextID() << "}" << endl;
 
     // ...
 }
@@ -404,8 +479,10 @@ void CanvasRenderingContext2D::putImageData(ImageData* imagedata, double dx,
     double dy, double dirtyX, double dirtyY, double dirtyWidth,
     double dirtyHeight)
 {
-    cerr << "putImageData(imagedata, dx, dy, dirtyX, dirtyY, dirtyWidth, "
-        "dirtyHeight)" << endl;
+    cerr << "{\"method\":\"putImageData\",\"params\":[\"" << imagedata <<
+        "\"," << dx << "," << dy << "," << dirtyX << "," << dirtyY << "," <<
+        dirtyWidth << "," << dirtyHeight << "],\"id\":" << _getNextID() <<
+        "}" << endl;
 
     // ...
 }
