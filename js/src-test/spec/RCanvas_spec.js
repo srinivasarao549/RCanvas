@@ -2,25 +2,6 @@ describe("RCanvas client-side lib", function(){
 
     describe("bindSocket", function(){
         
-        it("must bind this.handleMessage to socket onMethod", function(){
-            var r_canvas = new RCanvas({}),
-                r_canvas_ref = null,
-                r_canvas_arguments = [],
-                ws = {}
-
-            r_canvas.handleMessage = function(){
-                r_canvas_ref = this
-                r_canvas_arguments = [].slice.call(arguments, 0)
-            }
-        
-            r_canvas.bindSocket(ws);
-            ws.onmessage(1, 2, 3);
-
-            expect(r_canvas_ref).toBe(r_canvas);
-            expect(r_canvas_arguments).toEqual([1, 2, 3])
-        })
-
-
         it("must apply an RPC call to its stored context onmessage", function(){
             
             var args = [],

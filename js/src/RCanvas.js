@@ -4,46 +4,30 @@ function RCanvas(context, socket){
     this._socket = socket || undefined;
 }
 
-RCanvas.prototype = {
+RCanvas.prototype.bindSocket = function(socket){
+     
+    var context = this._context;
 
-    handleMessage: function(msg, socket){
-        var rpc = JSON.parse(msg),
-            result, 
+    socket.onmessage = handle_message;
+    
+    function handle_message(message){
+        
+        var rpc = JSON.parse(message),
             response = {
                 id: rpc.id,
                 error: null,
                 result: null
-            };
+            }; 
 
         try {
-
-            result =   this._context[rpc.method]
-                            .apply(this._context, rpc.params);
-        
-            if ( this._socket && rpc.id !== null) {
-            
-                response.result = result;
-                this._socket.send(JSON.stringify(response));
-            
-            }
-        
+            response.result = context[rpc.method].apply(context, rpc.params);
         } catch(e) {
-
-            if ( this._socket && rpc.id !== null) {
-                
-                response.error = e;
-                this._socket.send(JSON.stringify(response));
-            
-            } else {
-                throw e;
-            }
-        
+            response.error = e
         }
-    },
 
-    bindSocket: function(socket){
-        this._socket = socket;
-        socket.onmessage = this.handleMessage.bind(this);
+        // if the JSON-RPC call isn't a notification, send response
+        if ( rpc.id !== null ) socket.send(JSON.stringify(response))
     }
 
 }
+
