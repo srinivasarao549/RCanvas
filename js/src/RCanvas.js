@@ -1,5 +1,5 @@
 
-// At the moment, RCanvas expects the 2d context.  Open to change later
+// At the moment, RCanvas expects the context.  Open to change later
 function RCanvas(context){
     this._context = context;
 }
