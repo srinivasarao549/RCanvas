@@ -14,6 +14,8 @@ RCanvas' clientside implementation forms a simple wrapper around a context objec
 
 ### handleMessage
 
+*N.B. bindSocket is the preferred method for binding: see below*
+
 In the most basic usage, r_canvas has a handleMessage method, which can be used to accept JSON-RPC messages, and manipulate it's context on that basis:
 
 ```javascript
@@ -54,3 +56,5 @@ In order to allow us to send data back to the socket, it's necessary to bind it 
 ```
 
 Now, success or error will call ws' send method with the appropriate JSON, unless the original message contained id: null, as per the [the specification](http://json-rpc.org/wiki/specification).
+
+*N.B. bindSocket means you do not have to use handleMessage at all*
