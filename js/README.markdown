@@ -33,7 +33,7 @@ This lets us bind to a websocket that's sending data from RCanvas on the servers
     
 ```
 
-If a method that doesn't exist on context is specified, or another error with the call occurs, handleMessage will propogate that message if there is no socket bound (see below):
+If a method that doesn't exist on context is specified, or another error with the call occurs, handleMessage will throw an error if there is no socket bound (see below):
 
 ```javascript
     
