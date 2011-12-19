@@ -42,7 +42,7 @@ If a method that doesn't exist on context is specified, or another error with th
 
 ```
 
-### binding sockets
+### bindSocket
 
 In order to allow us to send data back to the socket, it's necessary to bind it to r_canvas. 
 
