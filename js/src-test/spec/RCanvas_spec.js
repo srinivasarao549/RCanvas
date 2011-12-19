@@ -19,30 +19,22 @@ describe("RCanvas client-side lib", function(){
             expect(r_canvas_ref).toBe(r_canvas);
             expect(r_canvas_arguments).toEqual([1, 2, 3])
         })
-    })
 
-    describe('handleMessage general', function(){
-    
-        it("must apply an RPC call to its stored context", function(){
+
+        it("must apply an RPC call to its stored context onmessage", function(){
             
             var args = [],
                 mock_context = {transform: function(){ args = arguments }},
-
-                r_canvas = new RCanvas(mock_context),
+                ws = {onmessage: function(){}, send: function(){}},
+                r_canvas = new RCanvas(mock_context).bindSocket(ws),
                 rpc = '{"method":"transform","params":[1,2,3,4,5,6],"id":1}';
 
-            r_canvas.handleMessage(rpc);
+            ws.onmessage(rpc);
             
             expect(args).toEqual([1, 2, 3, 4, 5, 6]);
-
         })
-    
-    })
-    
-    // TODO
-    describe("handleMessage w/ socket bound", function(){
-    
-        it("must send back info success IF id NOT null", function(){
+
+        it("must send back info success IF id NOT null onmessage", function(){
             
             var ws_response = null,
                 mock_context = {transform: function(){return 1}},
@@ -51,14 +43,15 @@ describe("RCanvas client-side lib", function(){
                 ws = {send: function(msg){ ws_response = msg}};
 
             r_canvas.bindSocket(ws);
-            r_canvas.handleMessage(rpc);
+            ws.onmessage(rpc);
             
             expect(JSON.parse(ws_response).error).toEqual(null);
             expect(JSON.parse(ws_response).id).toEqual(1);
             expect(JSON.parse(ws_response).result).toNotEqual(null);
         })
 
-        it("must not send back info success If id IS null", function(){
+      
+        it("must not send back info success If id IS null in onmessage", function(){
               var ws_response = null,
                 mock_context = {transform: function(){}},
                 r_canvas = new RCanvas(mock_context),
@@ -66,7 +59,7 @@ describe("RCanvas client-side lib", function(){
                 ws = {send: function(msg){ ws_response = msg}};
 
             r_canvas.bindSocket(ws);
-            r_canvas.handleMessage(rpc);
+            ws.onmessage(rpc);
             
             expect(ws_response).toEqual(null);
 
@@ -80,31 +73,14 @@ describe("RCanvas client-side lib", function(){
                 ws = {send: function(msg){ ws_response = msg }}
 
             r_canvas.bindSocket(ws);
-            r_canvas.handleMessage(rpc);
+            ws.onmessage(rpc);
             
             expect(JSON.parse(ws_response).result).toEqual(null);
             expect(JSON.parse(ws_response).id).toEqual(1);
             expect(JSON.parse(ws_response).error).toNotEqual(null); // incomplete test
 
-        
         })
 
     })
-
-    describe("handleMessage w/o socket bound", function(){
-    
-        it("must throw error on error", function(){
-            var mock_context = {transform: function(){}},
-                r_canvas = new RCanvas(mock_context),
-                rpc = '{"method":"NOTTRANSFORM","params":[1,2,3,4,5,6],"id":1}',
-                e = null;
-
-            try {
-                r_canvas.handleMessage(rpc);
-            } catch (e) {
-                expect(e instanceof Error).toBeTruthy();
-            }
-        })
-    
-    })
+  
 })

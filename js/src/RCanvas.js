@@ -1,7 +1,7 @@
 // At the moment, RCanvas expects the context.  Open to change later
-function RCanvas(context){
+function RCanvas(context, socket){
     this._context = context;
-    this._socket = undefined;
+    this._socket = socket || undefined;
 }
 
 RCanvas.prototype = {
