@@ -1,6 +1,7 @@
 // At the moment, RCanvas expects the context.  Open to change later
 function RCanvas(context){
     this._context = context;
+    this._socket = undefined;
 }
 
 RCanvas.prototype = {
@@ -12,7 +13,7 @@ RCanvas.prototype = {
                 id: rpc.id,
                 error: null,
                 result: null
-            }
+            };
 
         try {
 
@@ -34,7 +35,7 @@ RCanvas.prototype = {
                 this._socket.send(JSON.stringify(response));
             
             } else {
-                throw e
+                throw e;
             }
         
         }
